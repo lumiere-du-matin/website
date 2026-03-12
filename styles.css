@@ -16,9 +16,9 @@
   --button-text: #f6eee1;
 
   --sparkle-bright: rgba(246, 238, 225, 0.95);
-  --sparkle-soft: rgba(238, 217, 184, 0.8);
-  --sparkle-glow: rgba(242, 212, 161, 0.24);
-  --sparkle-haze: rgba(255, 245, 225, 0.09);
+  --sparkle-soft: rgba(238, 217, 184, 0.82);
+  --sparkle-glow: rgba(242, 212, 161, 0.28);
+  --sparkle-haze: rgba(255, 245, 225, 0.12);
 
   --headline-font: "Tiempos Headline Medium";
   --button-font: "Sohne Kraftig";
@@ -108,57 +108,51 @@ body {
   display: block;
 }
 
-/* wrapper holds the outer animation field */
 .button-effect-wrap {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  isolation: isolate;
+  width: max-content;
+  height: max-content;
 }
 
-/* outer glow / haze behind and around button */
-.button-effect-wrap::before {
-  content: "";
+.button-glow,
+.button-particles {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 260px;
-  height: 140px;
-  transform: translate(-50%, -50%) scale(0.92);
-  border-radius: 999px;
   pointer-events: none;
   opacity: 0;
+  transition: opacity 280ms ease, transform 380ms ease;
+}
+
+.button-glow {
   z-index: 0;
+  width: 280px;
+  height: 160px;
+  border-radius: 999px;
   background:
     radial-gradient(circle at 50% 50%, var(--sparkle-glow) 0%, transparent 58%),
-    radial-gradient(circle at 24% 50%, var(--sparkle-haze) 0%, transparent 28%),
-    radial-gradient(circle at 76% 50%, var(--sparkle-haze) 0%, transparent 28%);
-  filter: blur(16px);
+    radial-gradient(circle at 26% 50%, var(--sparkle-haze) 0%, transparent 26%),
+    radial-gradient(circle at 74% 50%, var(--sparkle-haze) 0%, transparent 26%);
+  filter: blur(18px);
+  transform: scale(0.94);
 }
 
-/* floating particles outside button */
-.button-effect-wrap::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 320px;
-  height: 180px;
-  transform: translate(-50%, -50%) scale(0.96);
-  pointer-events: none;
-  opacity: 0;
+.button-particles {
   z-index: 0;
+  width: 340px;
+  height: 200px;
+  transform: scale(0.97);
+  filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.22));
   background:
-    radial-gradient(circle, var(--sparkle-bright) 0 1.5px, transparent 2px) 8% 28% / 160px 160px no-repeat,
-    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 16% 74% / 160px 160px no-repeat,
-    radial-gradient(circle, var(--sparkle-bright) 0 2px, transparent 2.6px) 84% 22% / 160px 160px no-repeat,
-    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 92% 76% / 160px 160px no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.8) 0 1.2px, transparent 1.8px) 34% 10% / 160px 160px no-repeat,
-    radial-gradient(circle, rgba(238, 217, 184, 0.8) 0 1.2px, transparent 1.8px) 66% 88% / 160px 160px no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 2% 54% / 160px 160px no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 98% 46% / 160px 160px no-repeat;
-  filter: drop-shadow(0 0 5px rgba(246, 238, 225, 0.24));
+    radial-gradient(circle, var(--sparkle-bright) 0 1.5px, transparent 2px) 6% 30% / 100% 100% no-repeat,
+    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 14% 74% / 100% 100% no-repeat,
+    radial-gradient(circle, var(--sparkle-bright) 0 2px, transparent 2.6px) 86% 24% / 100% 100% no-repeat,
+    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 93% 72% / 100% 100% no-repeat,
+    radial-gradient(circle, rgba(246, 238, 225, 0.78) 0 1.2px, transparent 1.8px) 34% 10% / 100% 100% no-repeat,
+    radial-gradient(circle, rgba(238, 217, 184, 0.78) 0 1.2px, transparent 1.8px) 67% 88% / 100% 100% no-repeat,
+    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 2% 54% / 100% 100% no-repeat,
+    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 98% 46% / 100% 100% no-repeat;
 }
 
 .button {
@@ -198,21 +192,21 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .button-effect-wrap:hover::before {
-    opacity: 1;
-    animation: cosmicAura 2600ms ease-in-out infinite;
-  }
-
-  .button-effect-wrap:hover::after {
-    opacity: 1;
-    animation: cosmicParticles 3000ms ease-in-out infinite;
-  }
-
   .button-effect-wrap:hover .button {
     opacity: 0.985;
     box-shadow:
       0 0 0 1px rgba(246, 238, 225, 0.05) inset,
       0 10px 22px rgba(85, 67, 64, 0.12);
+  }
+
+  .button-effect-wrap:hover .button-glow {
+    opacity: 1;
+    animation: cosmicAura 2600ms ease-in-out infinite;
+  }
+
+  .button-effect-wrap:hover .button-particles {
+    opacity: 1;
+    animation: cosmicParticles 3000ms ease-in-out infinite;
   }
 }
 
@@ -230,52 +224,52 @@ body {
 
 @keyframes cosmicAura {
   0% {
-    opacity: 0.38;
-    transform: translate(-50%, -50%) scale(0.92);
-    filter: blur(16px);
+    opacity: 0.4;
+    transform: scale(0.94);
+    filter: blur(18px);
   }
 
   50% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.03);
-    filter: blur(20px);
+    transform: scale(1.03);
+    filter: blur(22px);
   }
 
   100% {
     opacity: 0.45;
-    transform: translate(-50%, -50%) scale(0.95);
-    filter: blur(17px);
+    transform: scale(0.96);
+    filter: blur(19px);
   }
 }
 
 @keyframes cosmicParticles {
   0% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.32;
+    transform: translateY(0) scale(0.97);
     filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.16));
   }
 
   20% {
     opacity: 0.72;
-    transform: translate(-50%, calc(-50% - 2px)) scale(1);
+    transform: translateY(-2px) scale(1);
     filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.26));
   }
 
   45% {
     opacity: 1;
-    transform: translate(-50%, calc(-50% - 4px)) scale(1.02);
+    transform: translateY(-4px) scale(1.02);
     filter: drop-shadow(0 0 8px rgba(246, 238, 225, 0.34));
   }
 
   70% {
     opacity: 0.8;
-    transform: translate(-50%, calc(-50% - 1px)) scale(1);
+    transform: translateY(-1px) scale(1);
     filter: drop-shadow(0 0 6px rgba(238, 217, 184, 0.24));
   }
 
   100% {
-    opacity: 0.35;
-    transform: translate(-50%, -50%) scale(0.97);
+    opacity: 0.36;
+    transform: translateY(0) scale(0.98);
     filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.16));
   }
 }
@@ -311,8 +305,8 @@ body {
     font-size: 18px;
   }
 
-  .button-effect-wrap::before,
-  .button-effect-wrap::after {
+  .button-glow,
+  .button-particles {
     display: none;
   }
 }
@@ -324,8 +318,8 @@ body {
     animation: none;
   }
 
-  .button-effect-wrap::before,
-  .button-effect-wrap::after {
+  .button-glow,
+  .button-particles {
     animation: none !important;
     opacity: 0 !important;
   }
