@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière du Matin</title>
+
+  <style>
+    @font-face {
+      font-family: "Sohne";
+      src: url("./fonts/font-soehne-kraftig.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #554340;
+      font-family: "Sohne", Arial, sans-serif;
+      font-weight: 700;
+      background: linear-gradient(
+        180deg,
+        #F2D4A1 0%,
+        #F2D6A7 10%,
+        #F2D8AC 20%,
+        #F2DAB2 30%,
+        #F2DCB7 40%,
+        #F1DEBD 50%,
+        #F1E1C3 60%,
+        #F1E3C8 70%,
+        #F0E5CE 80%,
+        #F0E7D3 90%,
+        #EFE9D9 100%
+      );
+    }
+
+    .container {
+      max-width: 720px;
+      padding: 40px 24px;
+    }
+
+    .logo {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      margin-bottom: 32px;
+    }
+
+    .headline {
+      margin-bottom: 32px;
+      font-size: 28px;
+      line-height: 1.4;
+      color: #554340;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1.5px solid #554340;
+      border-radius: 999px;
+      color: #554340;
+      text-decoration: none;
+      font-family: "Sohne", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      background: transparent;
+      transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+      background-color: rgba(85, 67, 64, 0.06);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img
+      src="./logos/logo-lumiereDuMatin.svg"
+      alt="Lumière du Matin logo"
+      class="logo"
+    />
+    <div class="headline">Serving high-luxury homes in Fairfield County, CT</div>
+    <a class="button" href="mailto:inquire@lumieredumatin.com">Inquire</a>
+  </div>
+</body>
+</html>
