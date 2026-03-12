@@ -87,6 +87,7 @@ body {
   font-family: "Tiempos Headline", Georgia, serif;
   color: var(--text-color);
   font-size: 40px;
+  font-weight: 500;
   line-height: 1.15;
   letter-spacing: 0;
   max-width: 860px;
