@@ -1,0 +1,156 @@
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("./fonts/font-tiemposHeadline-medium.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sohne";
+  src: url("./fonts/font-soehne-kraftig.woff2") format("woff2");
+  font-style: normal;
+}
+
+:root {
+  --text-color: #554340;
+  --button-bg: #5f4a49;
+  --button-text: #f6eee1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #f2d4a1 0%,
+    #f2d6a7 10%,
+    #f2d8ac 20%,
+    #f2dab2 30%,
+    #f2dcb7 40%,
+    #f1debd 50%,
+    #f1e1c3 60%,
+    #f1e3c8 70%,
+    #f0e5ce 80%,
+    #f0e7d3 90%,
+    #efe9d9 100%
+  );
+  color: var(--text-color);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  display: block;
+  width: 184px;
+  height: 184px;
+  margin: 0 0 40px 0;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Headline + button sub-container */
+.text-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* Headline */
+.headline {
+  margin: 0;
+  color: var(--text-color);
+  font-family: "Tiempos Headline", Georgia, serif;
+  font-size: 40pt;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+/* Button */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 64px;
+  border: none;
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  text-decoration: none;
+  font-family: "Sohne", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+  opacity: 0.94;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(85, 67, 64, 0.45);
+  outline-offset: 4px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .page {
+    padding: 40px 20px 56px;
+  }
+
+  .logo {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 40px;
+  }
+
+  .text-button-container {
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .headline {
+    font-size: 32pt;
+    line-height: 1.15;
+    max-width: 100%;
+  }
+
+  .button {
+    height: 56px;
+    padding: 0 56px;
+    font-size: 18px;
+  }
+}
