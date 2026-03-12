@@ -70,8 +70,8 @@ body {
   text-align: center;
 
   opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInContent 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms forwards;
+  transform: translateY(14px);
+  animation: fadeInContent 2200ms cubic-bezier(0.22, 1, 0.36, 1) 250ms forwards;
   will-change: opacity, transform;
 }
 
@@ -137,7 +137,7 @@ body {
 @keyframes fadeInContent {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
 
   to {
@@ -152,8 +152,8 @@ body {
   }
 
   .content-container {
-    animation-duration: 800ms;
-    animation-delay: 100ms;
+    animation-duration: 2000ms;
+    animation-delay: 220ms;
   }
 
   .logo {
