@@ -12,7 +12,7 @@
 
 :root {
   --text-color: #554340;
-  --button-bg: #5f4a49;
+  --button-bg: #6a5150;
   --button-text: #f6eee1;
 }
 
@@ -51,12 +51,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 24px;
+  padding: 32px 24px;
 }
 
 .content-container {
   width: 100%;
-  max-width: 760px;
+  max-width: 980px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,93 +64,38 @@ body {
   text-align: center;
 }
 
-/* Logo */
 .logo {
   display: block;
   width: 184px;
   height: 184px;
-  margin: 0 0 40px 0;
   object-fit: contain;
+  margin: 0 0 48px 0;
   flex-shrink: 0;
 }
 
-/* Headline + button sub-container */
 .text-button-container {
+  width: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
-  width: 100%;
-  max-width: 640px;
+  gap: 40px;
 }
 
-/* Headline */
 .headline {
   margin: 0;
-  color: var(--text-color);
   font-family: "Tiempos Headline", Georgia, serif;
-  font-size: 40pt;
+  color: var(--text-color);
+  font-size: 40px;
   line-height: 1.15;
   letter-spacing: 0;
+  max-width: 860px;
   text-wrap: balance;
 }
 
-/* Button */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 64px;
-  padding: 0 64px;
-  border: none;
-  border-radius: 999px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  text-decoration: none;
-  font-family: "Sohne", Arial, sans-serif;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
-  transition: opacity 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.button:hover {
-  opacity: 0.94;
-}
-
-.button:focus-visible {
-  outline: 2px solid rgba(85, 67, 64, 0.45);
-  outline-offset: 4px;
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-  .page {
-    padding: 40px 20px 56px;
-  }
-
-  .logo {
-    width: 160px;
-    height: 160px;
-    margin-bottom: 40px;
-  }
-
-  .text-button-container {
-    gap: 32px;
-    max-width: 100%;
-  }
-
-  .headline {
-    font-size: 32pt;
-    line-height: 1.15;
-    max-width: 100%;
-  }
-
-  .button {
-    height: 56px;
-    padding: 0 56px;
-    font-size: 18px;
-  }
-}
+ 
