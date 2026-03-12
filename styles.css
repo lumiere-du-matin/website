@@ -17,8 +17,7 @@
 
   --sparkle-bright: rgba(246, 238, 225, 0.95);
   --sparkle-soft: rgba(238, 217, 184, 0.82);
-  --sparkle-glow: rgba(242, 212, 161, 0.28);
-  --sparkle-haze: rgba(255, 245, 225, 0.12);
+  --sparkle-glow: rgba(242, 212, 161, 0.3);
 
   --headline-font: "Tiempos Headline Medium";
   --button-font: "Sohne Kraftig";
@@ -113,46 +112,68 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: max-content;
-  height: max-content;
-}
-
-.button-glow,
-.button-particles {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 280ms ease, transform 380ms ease;
+  width: 240px;
+  height: 140px;
 }
 
 .button-glow {
-  z-index: 0;
-  width: 280px;
-  height: 160px;
+  position: absolute;
+  inset: 0;
   border-radius: 999px;
-  background:
-    radial-gradient(circle at 50% 50%, var(--sparkle-glow) 0%, transparent 58%),
-    radial-gradient(circle at 26% 50%, var(--sparkle-haze) 0%, transparent 26%),
-    radial-gradient(circle at 74% 50%, var(--sparkle-haze) 0%, transparent 26%);
-  filter: blur(18px);
-  transform: scale(0.94);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at center,
+    var(--sparkle-glow) 0%,
+    rgba(242, 212, 161, 0.14) 35%,
+    rgba(242, 212, 161, 0) 72%
+  );
+  filter: blur(16px);
+  transform: scale(0.9);
 }
 
-.button-particles {
+.button-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
   z-index: 0;
-  width: 340px;
-  height: 200px;
-  transform: scale(0.97);
-  filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.22));
-  background:
-    radial-gradient(circle, var(--sparkle-bright) 0 1.5px, transparent 2px) 6% 30% / 100% 100% no-repeat,
-    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 14% 74% / 100% 100% no-repeat,
-    radial-gradient(circle, var(--sparkle-bright) 0 2px, transparent 2.6px) 86% 24% / 100% 100% no-repeat,
-    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 93% 72% / 100% 100% no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.78) 0 1.2px, transparent 1.8px) 34% 10% / 100% 100% no-repeat,
-    radial-gradient(circle, rgba(238, 217, 184, 0.78) 0 1.2px, transparent 1.8px) 67% 88% / 100% 100% no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 2% 54% / 100% 100% no-repeat,
-    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 98% 46% / 100% 100% no-repeat;
+}
+
+.button-sparkles::before,
+.button-sparkles::after {
+  content: "✦";
+  position: absolute;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--sparkle-bright);
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(246, 238, 225, 0.45);
+}
+
+.button-sparkles-1::before {
+  top: 18px;
+  left: 16px;
+}
+
+.button-sparkles-1::after {
+  top: 26px;
+  right: 18px;
+  font-size: 11px;
+  color: var(--sparkle-soft);
+}
+
+.button-sparkles-2::before {
+  bottom: 18px;
+  left: 26px;
+  font-size: 10px;
+  color: var(--sparkle-soft);
+}
+
+.button-sparkles-2::after {
+  bottom: 14px;
+  right: 24px;
 }
 
 .button {
@@ -201,12 +222,17 @@ body {
 
   .button-effect-wrap:hover .button-glow {
     opacity: 1;
-    animation: cosmicAura 2600ms ease-in-out infinite;
+    animation: buttonGlowPulse 2200ms ease-in-out infinite;
   }
 
-  .button-effect-wrap:hover .button-particles {
+  .button-effect-wrap:hover .button-sparkles-1 {
     opacity: 1;
-    animation: cosmicParticles 3000ms ease-in-out infinite;
+    animation: sparkleOrbit1 1800ms ease-in-out infinite;
+  }
+
+  .button-effect-wrap:hover .button-sparkles-2 {
+    opacity: 1;
+    animation: sparkleOrbit2 2200ms ease-in-out infinite;
   }
 }
 
@@ -222,55 +248,54 @@ body {
   }
 }
 
-@keyframes cosmicAura {
+@keyframes buttonGlowPulse {
   0% {
-    opacity: 0.4;
-    transform: scale(0.94);
-    filter: blur(18px);
+    opacity: 0.35;
+    transform: scale(0.9);
   }
 
   50% {
     opacity: 1;
-    transform: scale(1.03);
-    filter: blur(22px);
+    transform: scale(1.04);
   }
 
   100% {
-    opacity: 0.45;
-    transform: scale(0.96);
-    filter: blur(19px);
+    opacity: 0.4;
+    transform: scale(0.94);
   }
 }
 
-@keyframes cosmicParticles {
+@keyframes sparkleOrbit1 {
   0% {
-    opacity: 0.32;
-    transform: translateY(0) scale(0.97);
-    filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.16));
+    transform: rotate(0deg) scale(0.96);
+    opacity: 0.45;
   }
 
-  20% {
-    opacity: 0.72;
-    transform: translateY(-2px) scale(1);
-    filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.26));
-  }
-
-  45% {
+  50% {
+    transform: rotate(8deg) scale(1.03);
     opacity: 1;
-    transform: translateY(-4px) scale(1.02);
-    filter: drop-shadow(0 0 8px rgba(246, 238, 225, 0.34));
-  }
-
-  70% {
-    opacity: 0.8;
-    transform: translateY(-1px) scale(1);
-    filter: drop-shadow(0 0 6px rgba(238, 217, 184, 0.24));
   }
 
   100% {
-    opacity: 0.36;
-    transform: translateY(0) scale(0.98);
-    filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.16));
+    transform: rotate(0deg) scale(0.98);
+    opacity: 0.5;
+  }
+}
+
+@keyframes sparkleOrbit2 {
+  0% {
+    transform: rotate(0deg) scale(0.97);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: rotate(-10deg) scale(1.05);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: rotate(0deg) scale(0.99);
+    opacity: 0.4;
   }
 }
 
@@ -299,6 +324,11 @@ body {
     line-height: 1.15;
   }
 
+  .button-effect-wrap {
+    width: 220px;
+    height: 120px;
+  }
+
   .button {
     height: 56px;
     padding: 0 56px;
@@ -306,7 +336,7 @@ body {
   }
 
   .button-glow,
-  .button-particles {
+  .button-sparkles {
     display: none;
   }
 }
@@ -319,7 +349,7 @@ body {
   }
 
   .button-glow,
-  .button-particles {
+  .button-sparkles {
     animation: none !important;
     opacity: 0 !important;
   }
