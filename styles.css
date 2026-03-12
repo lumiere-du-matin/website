@@ -15,9 +15,10 @@
   --button-bg: #6a5150;
   --button-text: #f6eee1;
 
-  --sparkle-bright: #f6eedf;
-  --sparkle-soft: #eed9b8;
-  --sparkle-glow: rgba(242, 212, 161, 0.45);
+  --sparkle-bright: rgba(246, 238, 225, 0.95);
+  --sparkle-soft: rgba(238, 217, 184, 0.8);
+  --sparkle-glow: rgba(242, 212, 161, 0.22);
+  --sparkle-haze: rgba(255, 245, 225, 0.08);
 
   --headline-font: "Tiempos Headline Medium";
   --button-font: "Sohne Kraftig";
@@ -136,15 +137,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.button:hover {
-  opacity: 0.98;
-  box-shadow:
-    0 0 0 1px rgba(246, 238, 225, 0.06) inset,
-    0 10px 24px rgba(85, 67, 64, 0.12),
-    0 0 28px rgba(242, 212, 161, 0.14);
-  filter: saturate(1.03);
-}
-
 .button:active {
   transform: translateY(1px);
 }
@@ -154,54 +146,61 @@ body {
   outline-offset: 4px;
 }
 
-/* soft ambient aura */
+/* outer glow / haze around button */
 .button::before {
   content: "";
   position: absolute;
-  inset: -14px -20px;
+  inset: -24px -34px;
   border-radius: 999px;
   pointer-events: none;
   opacity: 0;
-  background:
-    radial-gradient(circle at 18% 42%, var(--sparkle-glow) 0, transparent 18%),
-    radial-gradient(circle at 84% 24%, rgba(246, 238, 225, 0.22) 0, transparent 14%),
-    radial-gradient(circle at 74% 78%, rgba(238, 217, 184, 0.18) 0, transparent 16%);
-  filter: blur(10px);
-  transform: scale(0.96);
-  transition: opacity 300ms ease, transform 420ms ease;
   z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, var(--sparkle-glow) 0%, transparent 58%),
+    radial-gradient(circle at 24% 50%, var(--sparkle-haze) 0%, transparent 28%),
+    radial-gradient(circle at 76% 50%, var(--sparkle-haze) 0%, transparent 28%);
+  filter: blur(12px);
+  transform: scale(0.96);
 }
 
-.button:hover::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* sparkle field */
+/* particle field outside button */
 .button::after {
-  content: "✦";
+  content: "";
   position: absolute;
-  inset: 0;
+  inset: -34px -52px;
   pointer-events: none;
-  color: transparent;
   opacity: 0;
   z-index: 2;
-  text-shadow:
-    -22px -18px 0 var(--sparkle-bright),
-    -6px -26px 0 rgba(246, 238, 225, 0.88),
-    116px -14px 0 var(--sparkle-soft),
-    142px 4px 0 var(--sparkle-bright),
-    154px -22px 0 rgba(246, 238, 225, 0.72),
-    -30px 44px 0 rgba(238, 217, 184, 0.86),
-    138px 42px 0 var(--sparkle-bright),
-    112px 56px 0 rgba(238, 217, 184, 0.76);
-  filter: drop-shadow(0 0 4px rgba(246, 238, 225, 0.45));
-  transform: scale(0.96);
+  background:
+    radial-gradient(circle, var(--sparkle-bright) 0 1.5px, transparent 2px) 8% 30% / 120px 120px no-repeat,
+    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 20% 78% / 120px 120px no-repeat,
+    radial-gradient(circle, var(--sparkle-bright) 0 2px, transparent 2.6px) 82% 22% / 120px 120px no-repeat,
+    radial-gradient(circle, var(--sparkle-soft) 0 1.5px, transparent 2px) 91% 72% / 120px 120px no-repeat,
+    radial-gradient(circle, var(--sparkle-bright) 0 1.2px, transparent 1.8px) 38% 8% / 120px 120px no-repeat,
+    radial-gradient(circle, var(--sparkle-soft) 0 1.2px, transparent 1.8px) 63% 92% / 120px 120px no-repeat,
+    radial-gradient(circle, rgba(246, 238, 225, 0.75) 0 1px, transparent 1.5px) 3% 58% / 120px 120px no-repeat,
+    radial-gradient(circle, rgba(246, 238, 225, 0.7) 0 1px, transparent 1.5px) 98% 44% / 120px 120px no-repeat;
+  filter: drop-shadow(0 0 4px rgba(246, 238, 225, 0.25));
+  transform: scale(0.985);
 }
 
-.button:hover::after {
-  opacity: 1;
-  animation: cosmicSparkle 2200ms ease-in-out infinite;
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    opacity: 0.985;
+    box-shadow:
+      0 0 0 1px rgba(246, 238, 225, 0.05) inset,
+      0 10px 22px rgba(85, 67, 64, 0.12);
+  }
+
+  .button:hover::before {
+    opacity: 1;
+    animation: cosmicAura 2400ms ease-in-out infinite;
+  }
+
+  .button:hover::after {
+    opacity: 1;
+    animation: cosmicParticles 2800ms ease-in-out infinite;
+  }
 }
 
 @keyframes fadeInContent {
@@ -216,75 +215,61 @@ body {
   }
 }
 
-@keyframes cosmicSparkle {
+@keyframes cosmicAura {
   0% {
-    text-shadow:
-      -22px -18px 0 rgba(246, 238, 225, 0.12),
-      -6px -26px 0 rgba(246, 238, 225, 0.05),
-      116px -14px 0 rgba(238, 217, 184, 0.08),
-      142px 4px 0 rgba(246, 238, 225, 0.1),
-      154px -22px 0 rgba(246, 238, 225, 0.05),
-      -30px 44px 0 rgba(238, 217, 184, 0.1),
-      138px 42px 0 rgba(246, 238, 225, 0.07),
-      112px 56px 0 rgba(238, 217, 184, 0.06);
-    transform: scale(0.97) rotate(0deg);
-    filter: drop-shadow(0 0 1px rgba(246, 238, 225, 0.12));
+    opacity: 0.45;
+    transform: scale(0.96);
+    filter: blur(12px);
   }
 
-  20% {
-    text-shadow:
-      -24px -20px 0 rgba(246, 238, 225, 0.95),
-      -5px -25px 0 rgba(246, 238, 225, 0.3),
-      118px -12px 0 rgba(238, 217, 184, 0.25),
-      141px 6px 0 rgba(246, 238, 225, 0.4),
-      156px -20px 0 rgba(246, 238, 225, 0.18),
-      -32px 43px 0 rgba(238, 217, 184, 0.75),
-      139px 41px 0 rgba(246, 238, 225, 0.22),
-      114px 57px 0 rgba(238, 217, 184, 0.14);
-    transform: scale(1) rotate(-1deg);
-    filter: drop-shadow(0 0 5px rgba(246, 238, 225, 0.32));
-  }
-
-  45% {
-    text-shadow:
-      -21px -17px 0 rgba(246, 238, 225, 0.3),
-      -7px -27px 0 rgba(246, 238, 225, 1),
-      116px -14px 0 rgba(238, 217, 184, 0.18),
-      143px 5px 0 rgba(246, 238, 225, 0.92),
-      153px -23px 0 rgba(246, 238, 225, 0.28),
-      -30px 44px 0 rgba(238, 217, 184, 0.2),
-      137px 43px 0 rgba(246, 238, 225, 0.86),
-      111px 55px 0 rgba(238, 217, 184, 0.78);
-    transform: scale(1.01) rotate(1deg);
-    filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.4));
-  }
-
-  70% {
-    text-shadow:
-      -23px -18px 0 rgba(246, 238, 225, 0.2),
-      -4px -25px 0 rgba(246, 238, 225, 0.22),
-      115px -15px 0 rgba(238, 217, 184, 0.95),
-      141px 4px 0 rgba(246, 238, 225, 0.24),
-      155px -21px 0 rgba(246, 238, 225, 0.88),
-      -29px 45px 0 rgba(238, 217, 184, 0.16),
-      139px 42px 0 rgba(246, 238, 225, 0.18),
-      113px 56px 0 rgba(238, 217, 184, 0.22);
-    transform: scale(1) rotate(-0.5deg);
-    filter: drop-shadow(0 0 6px rgba(242, 212, 161, 0.38));
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+    filter: blur(15px);
   }
 
   100% {
-    text-shadow:
-      -22px -18px 0 rgba(246, 238, 225, 0.12),
-      -6px -26px 0 rgba(246, 238, 225, 0.05),
-      116px -14px 0 rgba(238, 217, 184, 0.08),
-      142px 4px 0 rgba(246, 238, 225, 0.1),
-      154px -22px 0 rgba(246, 238, 225, 0.05),
-      -30px 44px 0 rgba(238, 217, 184, 0.1),
-      138px 42px 0 rgba(246, 238, 225, 0.07),
-      112px 56px 0 rgba(238, 217, 184, 0.06);
-    transform: scale(0.97) rotate(0deg);
-    filter: drop-shadow(0 0 1px rgba(246, 238, 225, 0.12));
+    opacity: 0.5;
+    transform: scale(0.97);
+    filter: blur(13px);
+  }
+}
+
+@keyframes cosmicParticles {
+  0% {
+    opacity: 0.35;
+    transform: translateY(0) scale(0.985);
+    filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.18));
+  }
+
+  18% {
+    opacity: 0.75;
+    transform: translateY(-1px) scale(1);
+    filter: drop-shadow(0 0 5px rgba(246, 238, 225, 0.26));
+  }
+
+  36% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.015);
+    filter: drop-shadow(0 0 7px rgba(246, 238, 225, 0.34));
+  }
+
+  55% {
+    opacity: 0.7;
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 4px rgba(238, 217, 184, 0.22));
+  }
+
+  74% {
+    opacity: 0.95;
+    transform: translateY(-1px) scale(1.01);
+    filter: drop-shadow(0 0 6px rgba(246, 238, 225, 0.3));
+  }
+
+  100% {
+    opacity: 0.4;
+    transform: translateY(0) scale(0.985);
+    filter: drop-shadow(0 0 2px rgba(246, 238, 225, 0.18));
   }
 }
 
@@ -319,17 +304,9 @@ body {
     font-size: 18px;
   }
 
+  .button::before,
   .button::after {
-    text-shadow:
-      -18px -16px 0 var(--sparkle-bright),
-      -4px -22px 0 rgba(246, 238, 225, 0.88),
-      100px -12px 0 var(--sparkle-soft),
-      122px 4px 0 var(--sparkle-bright),
-      132px -18px 0 rgba(246, 238, 225, 0.72),
-      -24px 36px 0 rgba(238, 217, 184, 0.86),
-      120px 34px 0 var(--sparkle-bright),
-      96px 46px 0 rgba(238, 217, 184, 0.76);
-    font-size: 13px;
+    display: none;
   }
 }
 
