@@ -69,7 +69,7 @@ body {
   width: 184px;
   height: 184px;
   object-fit: contain;
-  margin: 0 0 48px 0;
+  margin: 0 0 72px 0;
   flex-shrink: 0;
 }
 
@@ -79,7 +79,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 48px;
 }
 
 .headline {
@@ -87,7 +87,6 @@ body {
   font-family: "Tiempos Headline", Georgia, serif;
   color: var(--text-color);
   font-size: 40px;
-  font-weight: 500;
   line-height: 1.15;
   letter-spacing: 0;
   max-width: 860px;
@@ -99,4 +98,55 @@ body {
   align-items: center;
   justify-content: center;
   height: 64px;
- 
+  padding: 0 64px;
+  border: none;
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  text-decoration: none;
+  font-family: "Sohne", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+  opacity: 0.94;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(85, 67, 64, 0.45);
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 40px 24px;
+  }
+
+  .logo {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 64px;
+  }
+
+  .text-button-container {
+    max-width: 100%;
+    gap: 40px;
+  }
+
+  .headline {
+    font-size: 32px;
+    line-height: 1.15;
+    max-width: 720px;
+  }
+
+  .button {
+    height: 56px;
+    padding: 0 56px;
+    font-size: 18px;
+  }
+}
