@@ -1,11 +1,17 @@
 @font-face {
-  font-family: "Tiempos Headline";
+  font-family: "Tiempos Headline Regular";
+  src: url("./fonts/font-tiemposHeadline-regular.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Tiempos Headline Medium";
   src: url("./fonts/font-tiemposHeadline-medium.woff2") format("woff2");
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Sohne";
+  font-family: "Sohne Kraftig";
   src: url("./fonts/font-soehne-kraftig.woff2") format("woff2");
   font-style: normal;
 }
@@ -14,6 +20,10 @@
   --text-color: #554340;
   --button-bg: #6a5150;
   --button-text: #f6eee1;
+
+  /* Easy font switching */
+  --headline-font: "Tiempos Headline Regular";
+  --button-font: "Sohne Kraftig";
 }
 
 * {
@@ -44,6 +54,8 @@ body {
     #efe9d9 100%
   );
   color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page {
@@ -56,7 +68,7 @@ body {
 
 .content-container {
   width: 100%;
-  max-width: 980px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,7 +87,6 @@ body {
 
 .text-button-container {
   width: 100%;
-  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,13 +95,15 @@ body {
 
 .headline {
   margin: 0;
-  font-family: "Tiempos Headline", Georgia, serif;
+  font-family: var(--headline-font), Georgia, serif;
   color: var(--text-color);
   font-size: 40px;
   line-height: 1.15;
   letter-spacing: 0;
-  max-width: 860px;
-  text-wrap: balance;
+}
+
+.headline span {
+  display: block;
 }
 
 .button {
@@ -104,7 +117,7 @@ body {
   background: var(--button-bg);
   color: var(--button-text);
   text-decoration: none;
-  font-family: "Sohne", Arial, sans-serif;
+  font-family: var(--button-font), Arial, sans-serif;
   font-size: 20px;
   line-height: 1;
   letter-spacing: 0;
@@ -134,14 +147,12 @@ body {
   }
 
   .text-button-container {
-    max-width: 100%;
     gap: 40px;
   }
 
   .headline {
     font-size: 32px;
     line-height: 1.15;
-    max-width: 720px;
   }
 
   .button {
